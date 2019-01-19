@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=kloudspeaker
+Exec=kloudspeaker
+Icon=kloudspeaker
+Type=Application
+X-DocPath=kloudspeaker/index.html
+GenericName=A Simple Application written with KDE Frameworks
