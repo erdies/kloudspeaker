@@ -22,6 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define KLOUDSPEAKERVIEW_H
 
 #include "ui_kloudspeakerview.h"
+#include <qcolor.h>
 
 
 /**
@@ -49,11 +50,15 @@ public:
 public Q_SLOTS:
     void switchColors();
     void handleSettingsChanged();
+    // void mypaintEvent();
 
 private:
     // this is the name of the root widget inside our Ui file
     // you can rename it in designer and then change it here
     Ui::kloudspeakerView m_ui;
+    void paintEvent( QPaintEvent * ) override;
+    void showEvent(QShowEvent *event) override;  // Neue Zeile
+    int x_position(double x);
 };
 
 #endif // KLOUDSPEAKERVIEW_H
