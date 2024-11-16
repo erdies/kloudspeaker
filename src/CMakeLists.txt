@@ -2,6 +2,7 @@ set(kloudspeaker_SRCS
     main.cpp
     kloudspeakerwindow.cpp
     kloudspeakerview.cpp
+    driver.cpp
 )
 
 ecm_qt_declare_logging_category(kloudspeaker_SRCS
