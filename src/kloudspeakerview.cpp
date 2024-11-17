@@ -23,6 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "kloudspeakerSettings.h"
 #include "kloudspeakerdebug.h"
+#include "driver.h"
 
 #include <QPainter>
 #include <cmath>
@@ -34,10 +35,15 @@ kloudspeakerView::kloudspeakerView(QWidget *parent)
     handleSettingsChanged();
     update(); // Trigger initial paint
     setAttribute(Qt::WA_StyledBackground, true);
+    
+    drv1 = new driver(this);
+    drv1->Impedanz();
+    
 }
 
 kloudspeakerView::~kloudspeakerView()
 {
+    delete drv1;
 }
 
 void kloudspeakerView::switchColors()
@@ -68,6 +74,24 @@ int kloudspeakerView::x_position(double x)
 {
     double w = width();
     return static_cast<int>(w * 0.144764827 * std::log(x * 0.007957747155));
+}
+
+int kloudspeakerView::YScale(double x,int flag)   //Scaling on the currend window size in Y direction
+{
+	double H;
+	H = height();
+	if (flag==0)
+	{
+		return (int)(H/6 - x*H/60);
+	}
+	if (flag==1)
+	{
+		return (int)(5*H/6 - x*H/60);
+	}
+	else
+	{
+		return (int)(H/6 - x*H/60);
+	}
 }
 
 void kloudspeakerView::paintEvent(QPaintEvent *event)
@@ -125,6 +149,22 @@ void kloudspeakerView::paintEvent(QPaintEvent *event)
     painter.drawText(1,300*height()/605,"-20 dB");	
     painter.drawText(1,400*height()/605,"10 Ohm");	
     painter.drawText(1,500*height()/605,"0 Ohm");	
+    
+    // Write Impedance
+    pen.setWidth(1);
+    painter.setPen( pen );
+    
+    double impedance[200];
+    int intJ = 0;
+    for (int intI = 0; intI < 300; intI = intI + 2 ) {
+        impedance[ intJ ] = sqrt( pow( drv1->ResultImpedanz[ intI ], 2.0 ) + pow( drv1->ResultImpedanz[ intI + 1 ], 2.0 ) );
+        intJ++;
+    }
+    
+    for (i=1; i<150; i++) {
+        painter.drawLine( x_position(i-1), YScale(impedance[i-1], 1), x_position(i), YScale(impedance[i], 1));
+    }
+    
     
     
     

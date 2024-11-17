@@ -1,18 +1,17 @@
 #include "driver.h"
 #include "math.h"
 
-driver::driver()
-{
+
+driver::driver(QObject* parent) : QObject(parent) {
 
 	initContents();
 }
 
-driver::~driver()
-{
+driver::~driver() {
+	// Free ressource here
 }
 
-void driver::initContents()
-{
+void driver::initContents() {
 	Faktor=1.047128548;
 	Anzahl = 0;
 	Rdc=5.1;

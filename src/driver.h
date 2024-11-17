@@ -1,16 +1,14 @@
 #ifndef DRIVER_H
 #define DRIVER_H
 
-/**
-*the base class which provides mathematical routines for the KFilter App.
-*@author Martin Erdtmann
-*/
-
 #include <qstring.h>
+#include <QObject>
 
-class driver {
+class driver : public QObject {
+    Q_OBJECT
+    
 public:
-	driver();
+    explicit driver(QObject* parent = nullptr);
 	~driver();
 
 	double Vb,Fb,F3,Ql,Fs,V2,gain;

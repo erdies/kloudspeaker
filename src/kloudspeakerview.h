@@ -23,6 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "ui_kloudspeakerview.h"
 #include <qcolor.h>
+#include "driver.h"
 
 
 /**
@@ -33,15 +34,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * @author %{AUTHOR} <%{EMAIL}>
  * @version %{VERSION}
  */
-class kloudspeakerView : public QWidget
-{
+class kloudspeakerView : public QWidget {
     Q_OBJECT
+    
 public:
     /**
      * Default Constructor
      */
-    explicit kloudspeakerView(QWidget *parent);
-
+    //explicit kloudspeakerView(QWidget *parent);
+    explicit kloudspeakerView(QWidget *parent = nullptr);
     /**
      * Default Destructor
      */
@@ -59,6 +60,8 @@ private:
     void paintEvent( QPaintEvent * ) override;
     void showEvent(QShowEvent *event) override;  // Neue Zeile
     int x_position(double x);
+    int YScale(double x,int flag);
+    driver* drv1;
 };
 
 #endif // KLOUDSPEAKERVIEW_H
