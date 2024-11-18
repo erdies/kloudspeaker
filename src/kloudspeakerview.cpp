@@ -70,7 +70,7 @@ void kloudspeakerView::handleSettingsChanged()
     update();
 }
 
-void kloudspeakerView::initXvalue() // This function maps omega values to window coordinates on the x axis
+void kloudspeakerView::initXvalue() // This function maps omega values to a 150 x - grid points stored into Xvalue
 {
 	Xvalue[0] = 125.6637061;
 	for (int i=1; i<150; i++)
@@ -161,6 +161,8 @@ void kloudspeakerView::paintEvent(QPaintEvent *event)
     
     // Write Impedance
     pen.setWidth(1);
+    pen.setStyle(Qt::SolidLine);
+    pen.setColor("yellow");
     painter.setPen( pen );
     
     double impedance[200];
@@ -170,10 +172,12 @@ void kloudspeakerView::paintEvent(QPaintEvent *event)
         intJ++;
     }
     double omega = 125.6637061;
+    double next_omega = omega*1.047128548;
     for (i=1; i<150; i++) {
         //painter.drawLine(x_position( Xvalue[i-1] ), YScale(impedance[i-1], 1), x_position( Xvalue[i] ), YScale(impedance[i], 1));
-        painter.drawLine(x_position( omega ), YScale(impedance[i-1], 1), x_position( omega ), YScale(impedance[i], 1));
-        omega = omega*1.047128548;
+        painter.drawLine(x_position( omega ), YScale(impedance[i-1], 1), x_position( next_omega ), YScale(impedance[i], 1));
+        omega = next_omega;
+        next_omega = next_omega*1.047128548;
     }
     
     
