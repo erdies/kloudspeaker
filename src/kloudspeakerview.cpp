@@ -52,7 +52,7 @@ void kloudspeakerView::switchColors()
     QColor color = kloudspeakerSettings::colorBackground();
     kloudspeakerSettings::setColorBackground(kloudspeakerSettings::colorForeground());
     kloudspeakerSettings::setColorForeground(color);
-
+    initXvalue();
     handleSettingsChanged();
 }
 
@@ -68,6 +68,15 @@ void kloudspeakerView::handleSettingsChanged()
     
     // Trigger a repaint
     update();
+}
+
+void kloudspeakerView::initXvalue() // This function maps omega values to window coordinates on the x axis
+{
+	Xvalue[0] = 125.6637061;
+	for (int i=1; i<150; i++)
+	{
+		Xvalue[i] = Xvalue[i-1] * 1.047128548;
+	}
 }
 
 int kloudspeakerView::x_position(double x)
@@ -160,9 +169,11 @@ void kloudspeakerView::paintEvent(QPaintEvent *event)
         impedance[ intJ ] = sqrt( pow( drv1->ResultImpedanz[ intI ], 2.0 ) + pow( drv1->ResultImpedanz[ intI + 1 ], 2.0 ) );
         intJ++;
     }
-    
+    double omega = 125.6637061;
     for (i=1; i<150; i++) {
-        painter.drawLine( x_position(i-1), YScale(impedance[i-1], 1), x_position(i), YScale(impedance[i], 1));
+        //painter.drawLine(x_position( Xvalue[i-1] ), YScale(impedance[i-1], 1), x_position( Xvalue[i] ), YScale(impedance[i], 1));
+        painter.drawLine(x_position( omega ), YScale(impedance[i-1], 1), x_position( omega ), YScale(impedance[i], 1));
+        omega = omega*1.047128548;
     }
     
     

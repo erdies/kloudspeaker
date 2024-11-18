@@ -16,7 +16,7 @@ void driver::initContents() {
 	Anzahl = 0;
 	Rdc=5.1;
 	Lsp=0.00017;
-	F0=307;
+	F0=37;
 	Qtc=1.14;
 	Qms=1.9;
 	Qe=2.87;
@@ -24,7 +24,7 @@ void driver::initContents() {
 	Dm=7.3;
 	gain = 1.0;
 	PressureisActive=false;
-	ImpedanzisActive=false;
+	ImpedanzisActive=true;
 	SummaryisActive=false;
 	ScalarSummaryisActive=false;
 	ImpedanzSummaryisActive=false;
@@ -45,7 +45,7 @@ void driver::initContents() {
 		Unit[i]=0;
 	}
 	calibrate = 12.58925412;
-	m_qstringTitle = "This is a default driver";
+	m_qstringTitle = "Test driver";
 	Berechneparameter();
 	setmodified();
 }
@@ -241,6 +241,7 @@ void driver::ESBberechnen()
     inverse(&a,&b);
     x=Rdc+a;
     y=f*Lsp+b;
+	
 	/*   END
 	ELSE
 	BEGIN
