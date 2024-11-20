@@ -59,8 +59,8 @@ private:
     Ui::kloudspeakerView m_ui;
     void paintEvent( QPaintEvent * ) override;
     void showEvent(QShowEvent *event) override;  // Neue Zeile
-	double Xvalue[150];
-	void initXvalue();
+	double omega[150];
+	void init_omega();
     int x_position(double x);
     int YScale(double x,int flag);
     driver* drv1;

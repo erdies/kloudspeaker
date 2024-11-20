@@ -54,7 +54,7 @@ kloudspeakerWindow::~kloudspeakerWindow()
 
 void kloudspeakerWindow::fileNew()
 {
-    qCDebug(KLOUDSPEAKER) << "kloudspeakerWindow::fileNew()";
+    //qCDebug(KLOUDSPEAKER) << "kloudspeakerWindow::fileNew()";
     (new kloudspeakerWindow)->show();
 }
 

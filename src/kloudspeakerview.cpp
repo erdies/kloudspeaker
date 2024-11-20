@@ -35,9 +35,11 @@ kloudspeakerView::kloudspeakerView(QWidget *parent)
     handleSettingsChanged();
     update(); // Trigger initial paint
     setAttribute(Qt::WA_StyledBackground, true);
+    init_omega();    
     
     drv1 = new driver(this);
     drv1->Impedanz();
+    drv1->Schall();
     
 }
 
@@ -52,7 +54,6 @@ void kloudspeakerView::switchColors()
     QColor color = kloudspeakerSettings::colorBackground();
     kloudspeakerSettings::setColorBackground(kloudspeakerSettings::colorForeground());
     kloudspeakerSettings::setColorForeground(color);
-    initXvalue();
     handleSettingsChanged();
 }
 
@@ -66,16 +67,21 @@ void kloudspeakerView::handleSettingsChanged()
     // i18n : internationalization
     //m_ui.templateLabel->setStyleSheet("background-color: transparent;");
     
+    QPalette palette = this->palette();
+    palette.setColor(QPalette::Window, QColor(173, 216, 230)); // RGB-Wert für Hellblau
+    this->setPalette(palette);
+    this->setAutoFillBackground(true);
+    
     // Trigger a repaint
     update();
 }
 
-void kloudspeakerView::initXvalue() // This function maps omega values to a 150 x - grid points stored into Xvalue
+void kloudspeakerView::init_omega() // This function maps omega values to a 150 x - grid points stored into Xvalue
 {
-	Xvalue[0] = 125.6637061;
+	omega[0] = 125.6637061;
 	for (int i=1; i<150; i++)
 	{
-		Xvalue[i] = Xvalue[i-1] * 1.047128548;
+		omega[i] = omega[i-1] * 1.047128548;
 	}
 }
 
@@ -109,14 +115,14 @@ void kloudspeakerView::paintEvent(QPaintEvent *event)
     QPainter painter(this);
     
     // Hintergrund zeichnen
-    painter.fillRect(rect(), QColor(200, 200, 200));  // Hellgrauer Hintergrund
+    painter.fillRect(rect(), QColor(105, 105, 105));  // Darkgray
 
     // Gelbe Linie zeichnen
     // painter.setPen(QPen(Qt::yellow, 12, Qt::DashDotLine, Qt::RoundCap));
     // painter.drawLine(0, 0, 200, 200);
 
     // Vertikale Linien zeichnen
-    QPen pen(QColor(100, 100, 100));  // Dunklere Farbe für bessere Sichtbarkeit
+    QPen pen(QColor(10, 10, 10));  // Dunklere Farbe für bessere Sichtbarkeit
     pen.setWidth(1);
     painter.setPen(pen);
     
@@ -149,7 +155,6 @@ void kloudspeakerView::paintEvent(QPaintEvent *event)
     // Text zeichnen
     painter.setPen(Qt::black);
     painter.setFont(QFont("Arial", 10));
-    //painter.drawText(rect(), Qt::AlignCenter, "kloudspeakerView is working!");
     painter.drawText(x_position(90*6.28),50*height()/63,"100 Hz");
     painter.drawText(x_position(900*6.28),50*height()/63,"1 kHz");	
     painter.drawText(x_position(9000*6.28),50*height()/63,"10 kHz");	
@@ -164,20 +169,15 @@ void kloudspeakerView::paintEvent(QPaintEvent *event)
     pen.setStyle(Qt::SolidLine);
     pen.setColor("yellow");
     painter.setPen( pen );
-    
+
     double impedance[200];
     int intJ = 0;
     for (int intI = 0; intI < 300; intI = intI + 2 ) {
         impedance[ intJ ] = sqrt( pow( drv1->ResultImpedanz[ intI ], 2.0 ) + pow( drv1->ResultImpedanz[ intI + 1 ], 2.0 ) );
         intJ++;
     }
-    double omega = 125.6637061;
-    double next_omega = omega*1.047128548;
     for (i=1; i<150; i++) {
-        //painter.drawLine(x_position( Xvalue[i-1] ), YScale(impedance[i-1], 1), x_position( Xvalue[i] ), YScale(impedance[i], 1));
-        painter.drawLine(x_position( omega ), YScale(impedance[i-1], 1), x_position( next_omega ), YScale(impedance[i], 1));
-        omega = next_omega;
-        next_omega = next_omega*1.047128548;
+        painter.drawLine(x_position( omega[i-1] ), YScale(impedance[i-1], 1), x_position( omega[i] ), YScale(impedance[i], 1));
     }
     
     

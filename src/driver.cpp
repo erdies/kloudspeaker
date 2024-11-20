@@ -14,14 +14,14 @@ driver::~driver() {
 void driver::initContents() {
 	Faktor=1.047128548;
 	Anzahl = 0;
-	Rdc=5.1;
-	Lsp=0.00017;
-	F0=37;
-	Qtc=1.14;
-	Qms=1.9;
-	Qe=2.87;
-	Vas=10;
-	Dm=7.3;
+	Rdc=5.8;
+	Lsp=0.00036;
+	F0=75;
+	Qtc=0.52;
+	Qms=10.13;
+	Qe=0.54;
+	Vas=5.27;
+	Dm=10.1;
 	gain = 1.0;
 	PressureisActive=false;
 	ImpedanzisActive=true;
@@ -45,7 +45,7 @@ void driver::initContents() {
 		Unit[i]=0;
 	}
 	calibrate = 12.58925412;
-	m_qstringTitle = "Test driver";
+	m_qstringTitle = "Visaton B100";
 	Berechneparameter();
 	setmodified();
 }
