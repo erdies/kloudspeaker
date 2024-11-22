@@ -45,7 +45,8 @@ void driver::initContents() {
 		Unit[i]=0;
 	}
 	calibrate = 12.58925412;
-	m_qstringTitle = "Visaton B100";
+	//m_qstringTitle = "Visaton B100";
+	m_qstringTitle = QStringLiteral("Visaton B100");
 	Berechneparameter();
 	setmodified();
 }

@@ -1,30 +1,21 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.16) # Aktuelle Mindestversion verwenden, falls möglich
 
-project(kloudspeaker)
+project(kloudspeaker VERSION 1.0 LANGUAGES CXX)
 
-set(QT_MIN_VERSION "5.9.0")
-set(KF_MIN_VERSION "5.37.0")
+# Set minimum required versions for Qt and KDE Frameworks
+set(QT_MIN_VERSION "5.15.0") # Empfohlen: Mindestens Qt 5.15 verwenden
+set(KF_MIN_VERSION "5.85.0") # Aktualisieren, wenn möglich
 
 set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTOMOC ON) # Automatisch MOC-Dateien generieren
+set(CMAKE_AUTORCC ON) # Automatisch Ressourcen-Dateien verarbeiten
 
+# Qt5 finden (Widgets wird als Pflichtmodul angegeben)
+find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Widgets)
 
-
-
-find_package(Qt5 REQUIRED COMPONENTS Widgets) # Füge hier andere Module hinzu, die du benötigst
-
-set(UI_FILES "settings.ui" "kloudspeakerview.ui")
-
-qt5_wrap_ui(UI_HEADERS ${UI_FILES})  # UI-Dateien in Header-Dateien umwandeln
-
-
-
-
-message(STATUS "CMAKE_AUTOUIC is set to: ${CMAKE_AUTOUIC}")
-
-
+# ECM-Modul und KDE Frameworks finden
 find_package(ECM ${KF_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
-
 
 include(KDEInstallDirs)
 include(KDECMakeSettings)
@@ -33,8 +24,7 @@ include(ECMInstallIcons)
 include(ECMQtDeclareLoggingCategory)
 include(FeatureSummary)
 
-find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core Gui Widgets)
-
+# Benötigte KF5-Komponenten einbinden
 find_package(KF5 ${KF_MIN_VERSION} REQUIRED COMPONENTS
     ConfigWidgets
     CoreAddons
@@ -45,18 +35,20 @@ find_package(KF5 ${KF_MIN_VERSION} REQUIRED COMPONENTS
     XmlGui
 )
 
+# Unterverzeichnisse hinzufügen
 add_subdirectory(doc)
 add_subdirectory(src)
 add_subdirectory(icons)
 
-# set(CMAKE_AUTOUIC_SEARCH_PATHS ${CMAKE_SOURCE_DIR}/src)
+# UI-Dateien, falls erforderlich
+set(UI_FILES "settings.ui" "kloudspeakerview.ui")
 
-# Make it possible to use the po files fetched by the fetch-translations step
+# Installationsschritte
+install(FILES kloudspeakerui.rc DESTINATION ${KDE_INSTALL_KXMLGUIDIR}/kloudspeaker)
+
+# Lokalisierungsunterstützung (PO-Dateien und Dokufiles)
 ki18n_install(po)
 kdoctools_install(po)
 
+# Zusammenfassung der gefundenen Pakete
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
-
-install(FILES kloudspeakerui.rc DESTINATION ${KDE_INSTALL_KXMLGUIDIR}/kloudspeaker)
-
-

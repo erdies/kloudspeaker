@@ -59,18 +59,19 @@ void kloudspeakerView::switchColors()
 
 void kloudspeakerView::handleSettingsChanged()
 {
-    //QPalette palette = m_ui.templateLabel->palette();
-    //palette.setColor(QPalette::Window, kloudspeakerSettings::colorBackground());
-    //palette.setColor(QPalette::WindowText, kloudspeakerSettings::colorForeground());
-    //m_ui.templateLabel->setPalette(palette);
 
+    QPalette palette = this->palette();
+    palette.setColor(QPalette::Window, kloudspeakerSettings::colorBackground());
+    palette.setColor(QPalette::WindowText, kloudspeakerSettings::colorForeground());
+
+    
     // i18n : internationalization
     //m_ui.templateLabel->setStyleSheet("background-color: transparent;");
     
-    QPalette palette = this->palette();
-    palette.setColor(QPalette::Window, QColor(173, 216, 230)); // RGB-Wert für Hellblau
-    this->setPalette(palette);
-    this->setAutoFillBackground(true);
+    //QPalette palette = this->palette();
+    //palette.setColor(QPalette::Window, QColor(173, 216, 230));
+    //this->setPalette(palette);
+    //this->setAutoFillBackground(true);
     
     // Trigger a repaint
     update();
@@ -114,14 +115,10 @@ void kloudspeakerView::paintEvent(QPaintEvent *event)
 
     QPainter painter(this);
     
-    // Hintergrund zeichnen
-    painter.fillRect(rect(), QColor(105, 105, 105));  // Darkgray
+    // Fill background
+    painter.fillRect(rect(), kloudspeakerSettings::colorBackground() );
 
-    // Gelbe Linie zeichnen
-    // painter.setPen(QPen(Qt::yellow, 12, Qt::DashDotLine, Qt::RoundCap));
-    // painter.drawLine(0, 0, 200, 200);
-
-    // Vertikale Linien zeichnen
+    // Draw vertikal lines
     QPen pen(QColor(10, 10, 10));  // Dunklere Farbe für bessere Sichtbarkeit
     pen.setWidth(1);
     painter.setPen(pen);
@@ -154,15 +151,17 @@ void kloudspeakerView::paintEvent(QPaintEvent *event)
 
     // Text zeichnen
     painter.setPen(Qt::black);
-    painter.setFont(QFont("Arial", 10));
-    painter.drawText(x_position(90*6.28),50*height()/63,"100 Hz");
-    painter.drawText(x_position(900*6.28),50*height()/63,"1 kHz");	
-    painter.drawText(x_position(9000*6.28),50*height()/63,"10 kHz");	
-    painter.drawText(5,100*height()/625,  "0 dB");	
-    painter.drawText(1,200*height()/610,"-10 dB");	
-    painter.drawText(1,300*height()/605,"-20 dB");	
-    painter.drawText(1,400*height()/605,"10 Ohm");	
-    painter.drawText(1,500*height()/605,"0 Ohm");	
+    //painter.setFont(QFont("Arial", 10));
+    //painter.drawText(x_position(90*6.28),50*height()/63,"100 Hz");
+    painter.setFont(QFont(QStringLiteral("Arial"), 10));
+    painter.drawText(x_position(90*6.28), 50*height()/63, QStringLiteral("100 Hz"));
+    painter.drawText(x_position(900*6.28),50*height()/63,QStringLiteral("1 kHz"));	
+    painter.drawText(x_position(9000*6.28),50*height()/63,QStringLiteral("10 kHz"));	
+    painter.drawText(5,100*height()/625,  QStringLiteral("0 dB"));	
+    painter.drawText(1,200*height()/610,QStringLiteral("-10 dB"));	
+    painter.drawText(1,300*height()/605,QStringLiteral("-20 dB"));	
+    painter.drawText(1,400*height()/605,QStringLiteral("10 Ohm"));	
+    painter.drawText(1,500*height()/605,QStringLiteral("0 Ohm"));	
     
     // Write Impedance
     pen.setWidth(1);

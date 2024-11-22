@@ -1,0 +1,49 @@
+# Build-Ordner und generierte Dateien
+build/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+CTestTestfile.cmake
+Makefile
+compile_commands.json
+*.o
+*.obj
+*.so
+*.a
+*.lib
+*.dll
+*.dylib
+*.exe
+
+# Autogenerierte Dateien von Qt
+*_autogen/
+moc_*.cpp
+ui_*.h
+
+# Temporäre Dateien und Logs
+*.log
+*.tmp
+*.swp
+*.bak
+*.old
+
+# IDE- und Editor-spezifische Dateien
+*.kdev4
+*.user
+*.pro.user
+*.project
+*.cproject
+.idea/
+.vscode/
+
+# Andere generierte Dateien
+doc/CMakeFiles/
+doc/index.cache.bz2
+icons/CMakeFiles/
+src/CMakeFiles/
+src/*.kcfgc
+src/*.kcfg
+
+# Systemdateien
+.DS_Store
+Thumbs.db
