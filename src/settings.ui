@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>365</width>
-    <height>200</height>
+    <width>215</width>
+    <height>144</height>
    </rect>
   </property>
   <layout class="QFormLayout">
@@ -34,15 +34,34 @@ p, li { white-space: pre-wrap; }
      </property>
     </widget>
    </item>
-   <item row="1" column="0">
-    <widget class="QLabel" name="foregroundLabel">
+   <item row="1" column="1">
+    <widget class="KColorButton" name="kcfg_colorImpedance">
+     <property name="minimumSize">
+      <size>
+       <width>88</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>88</width>
+       <height>16777215</height>
+      </size>
+     </property>
      <property name="text">
-      <string>Foreground color:</string>
+      <string/>
      </property>
     </widget>
    </item>
-   <item row="1" column="1">
-    <widget class="KColorButton" name="kcfg_colorForeground">
+   <item row="2" column="0">
+    <widget class="QLabel" name="foregroundLabel">
+     <property name="text">
+      <string>  Grid  color:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="KColorButton" name="kcfg_colorGrid">
      <property name="toolTip">
       <string>Choose a new foreground color</string>
      </property>
@@ -57,26 +76,10 @@ p, li { white-space: pre-wrap; }
      </property>
     </widget>
    </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="projectLabel">
+   <item row="1" column="0">
+    <widget class="QLabel" name="impedanceLabel">
      <property name="text">
-      <string>Project age:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1">
-    <widget class="QSpinBox" name="kcfg_ageInDays">
-     <property name="toolTip">
-      <string>Set the project age (in days)</string>
-     </property>
-     <property name="whatsThis">
-      <string>Change the project age (in days) by choosing a new number of days.</string>
-     </property>
-     <property name="minimum">
-      <number>1</number>
-     </property>
-     <property name="value">
-      <number>2</number>
+      <string>Impedance color:</string>
      </property>
     </widget>
    </item>

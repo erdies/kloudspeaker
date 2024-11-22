@@ -7,11 +7,11 @@
   <group name="Preferences">
     <entry name="colorBackground" type="Color">
 	    <label>color of the background</label>
-	    <default>black</default>
+	    <default>grey</default>
     </entry>
-    <entry name="colorForeground" type="Color">
-	    <label>color of the foreground</label>
-	    <default>yellow</default>
+    <entry name="colorGrid" type="Color">
+	    <label>color of the grid</label>
+	    <default>black</default>
     </entry>
     <entry name="colorImpedance" type="Color">
 	    <label>color of the impedance</label>

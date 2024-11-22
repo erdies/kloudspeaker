@@ -50,24 +50,22 @@ kloudspeakerView::~kloudspeakerView()
 
 void kloudspeakerView::switchColors()
 {
-    // switch the foreground/background colors of the label
-    QColor color = kloudspeakerSettings::colorBackground();
-    kloudspeakerSettings::setColorBackground(kloudspeakerSettings::colorForeground());
-    kloudspeakerSettings::setColorForeground(color);
+    // switch the foreground/background colors
+    //QColor color = kloudspeakerSettings::colorBackground();
+    //kloudspeakerSettings::setColorBackground(kloudspeakerSettings::colorBackground());
+    //kloudspeakerSettings::setColorBackground( color );
     handleSettingsChanged();
 }
 
 void kloudspeakerView::handleSettingsChanged()
 {
 
-    QPalette palette = this->palette();
-    palette.setColor(QPalette::Window, kloudspeakerSettings::colorBackground());
-    palette.setColor(QPalette::WindowText, kloudspeakerSettings::colorForeground());
+    //QPalette palette = this->palette();
+    //palette.setColor(QPalette::Window, kloudspeakerSettings::colorImpedance());
 
     
     // i18n : internationalization
     //m_ui.templateLabel->setStyleSheet("background-color: transparent;");
-    
     //QPalette palette = this->palette();
     //palette.setColor(QPalette::Window, QColor(173, 216, 230));
     //this->setPalette(palette);
@@ -118,8 +116,9 @@ void kloudspeakerView::paintEvent(QPaintEvent *event)
     // Fill background
     painter.fillRect(rect(), kloudspeakerSettings::colorBackground() );
 
-    // Draw vertikal lines
-    QPen pen(QColor(10, 10, 10));  // Dunklere Farbe für bessere Sichtbarkeit
+    // Draw lines
+    QPen pen;
+    pen.setColor( kloudspeakerSettings::colorGrid() );
     pen.setWidth(1);
     painter.setPen(pen);
     
@@ -166,7 +165,8 @@ void kloudspeakerView::paintEvent(QPaintEvent *event)
     // Write Impedance
     pen.setWidth(1);
     pen.setStyle(Qt::SolidLine);
-    pen.setColor("yellow");
+    //pen.setColor("red");
+    pen.setColor( kloudspeakerSettings::colorImpedance() );
     painter.setPen( pen );
 
     double impedance[200];
