@@ -6,6 +6,8 @@ cmake_install.cmake
 CTestTestfile.cmake
 Makefile
 compile_commands.json
+kloudspeaker
+ecm_uninstall.cmake
 *.o
 *.obj
 *.so
@@ -46,6 +48,7 @@ src/*.kcfgc
 src/*.kcfg
 src/kloudspeakerSettings.cpp
 src/kloudspeakerSettings.h
+src/kloudspeakerdebug.*
 
 # Systemdateien
 .DS_Store
