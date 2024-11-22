@@ -19,6 +19,7 @@ compile_commands.json
 *_autogen/
 moc_*.cpp
 ui_*.h
+*.kcfgc
 
 # Temporäre Dateien und Logs
 *.log
@@ -43,6 +44,8 @@ icons/CMakeFiles/
 src/CMakeFiles/
 src/*.kcfgc
 src/*.kcfg
+src/kloudspeakerSettings.cpp
+src/kloudspeakerSettings.h
 
 # Systemdateien
 .DS_Store
