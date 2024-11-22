@@ -1,5 +1,4 @@
 cmake_minimum_required(VERSION 3.16) # Aktuelle Mindestversion verwenden, falls möglich
-
 project(kloudspeaker VERSION 1.0 LANGUAGES CXX)
 
 # Set minimum required versions for Qt and KDE Frameworks
